@@ -5,6 +5,10 @@ const HomeBanner = () => {
     <section id='home' className="event_banner_area">
       <div
         className="parallax-effect"
+        style={{
+          backgroundImage:
+            "url(" + require("../../img/logo-1.png") + ")",
+        }}
       ></div>
       <div className="container">
         <div className="event_banner_content">

@@ -7,7 +7,7 @@ class EventTeamItem extends Component {
         return(
             <div className="item">
                 <div className="e_team_img">
-                    <img src={image} alt=""/>
+                <img src={require ("../../img/" + image)} alt=""/>
                     <ul className="list-unstyled">
                         {
                             FooterData.socialIcon.map(item=>{
