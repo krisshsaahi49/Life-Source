@@ -190,9 +190,9 @@ const RecipientSignUpForm = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                      <button type="submit" className="btn_three">
+                    <Link exact title="signUp" className="nav-link" to='/DonorOrRecipientPage'> <button type="submit" className="btn_three">
                         Sign Up
-                      </button>
+                      </button></Link>
                       <div className="social_text d-flex ">
                         <div className="lead-text">Or Sign up Using</div>
                         <ul className="list-unstyled social_tag mb-0">
