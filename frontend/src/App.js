@@ -9,6 +9,7 @@ import SignUp from "./Pages/SignUp";
 // import NotFound from "./Pages/404";
 import { animateScroll } from "react-scroll";
 import RecipientSignUp from "./Pages/RecipientSignUp";
+import DonorOrRecipientPage from "./Pages/DonorOrRecipientPage";
 
 
 class App extends Component {
@@ -34,6 +35,11 @@ class App extends Component {
             exact={true}
             path={"/Contact"}
             component={Contact}
+          />
+           <ScrollToTopRoute
+            exact={true}
+            path={"/DonorOrRecipientPage"}
+            component={DonorOrRecipientPage}
           />
         </Switch>
       </Router>
