@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Contact from "./Pages/Contact";
+import ScrollToTopRoute from "./ScrollToTopRoute";
+import HomeEvent from "./Pages/Home-event";
+import Faq from "./Pages/Faq";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import { animateScroll } from "react-scroll";
+import RecipientSignUp from "./Pages/RecipientSignUp";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  componentDidMount() {
+    this.props.hideLoader();
+    if (performance.navigation.type === 1) {
+      window.location.href = "/";
+    }
+  }
+  scrollToEventAbout = () => {
+    animateScroll.scrollToComponent(Contact, { offset: 0, duration: 500 });
+  };
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <ScrollToTopRoute exact path={"/"} component={HomeEvent} />
+          <ScrollToTopRoute exact path={"/Faq"} component={Faq} />
+          <ScrollToTopRoute exact path={"/SignIn"} component={SignIn} />
+          <ScrollToTopRoute exact path={"/SignUp"} component={SignUp} />
+          <ScrollToTopRoute exact path={"/RecipientSignUp"} component={RecipientSignUp} />
+          <ScrollToTopRoute
+            exact
+            path={"/Contact"}
+            component={Contact}
+          />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
