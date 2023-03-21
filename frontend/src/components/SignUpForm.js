@@ -18,6 +18,8 @@ const SignUpForm = () => {
   const [lasttimeDonatedblood, setDonateddate] = useState("");
   const [anyundergoingMedication, setMedications] = useState("");
   const [anyotherHealthissue, setHealthissues] = useState("");
+  const[testedCovid, setTestedCovid] = useState(false)
+  const[testedHiv, setTestedHiv] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,6 +42,8 @@ const SignUpForm = () => {
         height,
         weight,
         lasttimeDonatedblood,
+        testedCovid,
+        testedHiv,
         anyundergoingMedication,
         anyotherHealthissue,
       }),
@@ -208,14 +212,17 @@ const SignUpForm = () => {
                       <input
                         type="radio"
                         name="covid"
-                        value
+                        value={true}
+                        checked={testedCovid === true}
+                        onChange={(e) => setTestedCovid(e.target.value)}
                       />
                       <label>Yes</label>
                       <input
                         type="radio"
                         name="covid"
+                        checked={testedCovid === false}
                         value={false}
-                   
+                        onChange={(e) => setTestedCovid(e.target.value)}
                       />
                       <label>No</label>
                     </div>
@@ -224,13 +231,17 @@ const SignUpForm = () => {
                       <input
                         type="radio"
                         name="hiv"
-                        value
+                        checked={testedHiv === true}
+                        value={true}
+                        onChange={(e) => setTestedHiv(e.target.value)}
                       />
                       <label>Yes</label>
                       <input
                         type="radio"
                         name="hiv"
+                        checked={testedHiv === false}
                         value={false}
+                        onChange={(e) => setTestedHiv(e.target.value)}
                       />
                       <label>No</label>
                     </div>
