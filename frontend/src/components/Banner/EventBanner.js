@@ -1,8 +1,8 @@
 import React from "react";
 
-const HomeBanner = () => {
+const EventBanner = () => {
   return (
-    <section id='home' className="event_banner_area">
+    <section className="event_banner_area">
       <div
         className="parallax-effect"
         style={{
@@ -22,10 +22,12 @@ const HomeBanner = () => {
             <br /> With our easy-to-use platform, you can make a life-saving
             difference with just a few clicks.
           </p>
+          {/* <a className="event_btn btn_hover wow fadeInLeft" data-wow-delay="0.9s" href="/#">Register Now</a>
+                    <a className="event_btn event_btn_two btn_hover wow fadeInRight" data-wow-delay="0.9s" href="/#"><i className="arrow_triangle-right_alt2"></i>How we Work</a> */}
         </div>
       </div>
     </section>
   );
 };
 
-export default HomeBanner;
+export default EventBanner;
