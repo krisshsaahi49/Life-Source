@@ -10,6 +10,8 @@ import SignUp from "./Pages/SignUp";
 import { animateScroll } from "react-scroll";
 import RecipientSignUp from "./Pages/RecipientSignUp";
 import DonorOrRecipientPage from "./Pages/DonorOrRecipientPage";
+import TermsOfUse from "./components/Footer/TermsOfUse";
+import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
 
 
 class App extends Component {
@@ -41,6 +43,8 @@ class App extends Component {
             path={"/DonorOrRecipientPage"}
             component={DonorOrRecipientPage}
           />
+          <ScrollToTopRoute exact={true} path={"/terms"} component={TermsOfUse} />
+          <ScrollToTopRoute exact={true} path={"/policy"} component={PrivacyPolicy} />
         </Switch>
       </Router>
     );
