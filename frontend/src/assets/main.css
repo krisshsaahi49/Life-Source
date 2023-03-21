@@ -3074,7 +3074,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*================= Start breadcrumb_area css =================*/
 /* about and all */
 .breadcrumb_area {
-  background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%);;
+  /* background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%); */
+  background-image: linear-gradient(180deg, #e8ed2c57 0%, #782a2a 100%);
   position: relative;
   z-index: 1;
   padding: 235px 0px 125px;
@@ -4385,6 +4386,15 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 #landingContent{
   color: white;
+}
+
+#Terms {
+  color: rgb(78, 15, 21);
+  background-color: #d3b3b3;
+}
+
+#Terms h1 {
+  text-align: center;
 }
 
 /* ------- */
