@@ -1,10 +1,10 @@
 import React from 'react';
-import Banner from '../components/Banner';
+import Breadcrumb from '../components/Breadcrumb';
 
 const About = () => {
   return (
     <div id="about" className="body_wrapper">
-    <Banner
+      <Breadcrumb
         breadcrumbClass="breadcrumb_area_two"
         imgName="breadcrumb/banner_bg.png"
         Ptitle="About"

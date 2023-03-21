@@ -6,6 +6,7 @@ import HomeEvent from "./Pages/Home-event";
 import Faq from "./Pages/Faq";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
+// import NotFound from "./Pages/404";
 import { animateScroll } from "react-scroll";
 import RecipientSignUp from "./Pages/RecipientSignUp";
 
@@ -24,13 +25,13 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <ScrollToTopRoute exact path={"/"} component={HomeEvent} />
-          <ScrollToTopRoute exact path={"/Faq"} component={Faq} />
-          <ScrollToTopRoute exact path={"/SignIn"} component={SignIn} />
-          <ScrollToTopRoute exact path={"/SignUp"} component={SignUp} />
-          <ScrollToTopRoute exact path={"/RecipientSignUp"} component={RecipientSignUp} />
+          <ScrollToTopRoute exact={true} path={"/"} component={HomeEvent} />
+          <ScrollToTopRoute exact={true} path={"/Faq"} component={Faq} />
+          <ScrollToTopRoute exact={true} path={"/SignIn"} component={SignIn} />
+          <ScrollToTopRoute exact={true} path={"/SignUp"} component={SignUp} />
+          <ScrollToTopRoute exact={true} path={"/RecipientSignUp"} component={RecipientSignUp} />
           <ScrollToTopRoute
-            exact
+            exact={true}
             path={"/Contact"}
             component={Contact}
           />
