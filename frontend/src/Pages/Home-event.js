@@ -1,7 +1,6 @@
 import React from "react";
 import EventBanner from "../components/Banner/EventBanner";
 import EventTeam from "../components/Team/EventTeam";
-import EventFact from "../components/EventFact";
 import About from "./About";
 import Mission from "./Mission";
 import Contact from "./Contact";
@@ -22,7 +21,6 @@ const homesupport = () => {
       <About />
       <Mission />
       <EventTeam />
-      <EventFact />
       <Donor/>
       <Recipient/>
       <Contact />

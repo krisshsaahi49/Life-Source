@@ -12,9 +12,9 @@ const CustomNavbar=(props)=> {
           <nav className={`navbar navbar-expand-lg menu_one ${mClass}`}>
             <div className={`container ${cClass}`}>
               <Link1 className={`navbar-brand ${slogo}`} to="/">
-                <img src={require("../img/liefesource1_160*90.svg")} alt="LifeSource" />
+                <img src={require("../img/Logo-lite.svg")} alt="" />
                 <img
-                  src={require("../img/lifesource2_160*90.svg")}
+                  src={require("../img/Logo-dark.svg")}
                   alt="logo"
                 />
               </Link1>

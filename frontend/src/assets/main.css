@@ -3074,10 +3074,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*================= Start breadcrumb_area css =================*/
 /* about and all */
 .breadcrumb_area {
-  background-image: -moz-linear-gradient(180deg, #5e2ced 0%, #a485fd 100%);
-  background-image: -webkit-linear-gradient(180deg, #5e2ced 0%, #a485fd 100%);
-  background-image: -ms-linear-gradient(180deg, #5e2ced 0%, #a485fd 100%);
-  background-image:  linear-gradient(180deg, #5e2ced 0%, #a485fd 100%);
+  background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%);;
   position: relative;
   z-index: 1;
   padding: 235px 0px 125px;
@@ -3091,7 +3088,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   z-index: -1;
 }
 .breadcrumb_area p{
-  max-width: 580px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -4045,7 +4042,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background-image: linear-gradient(-120deg, #6e1822 0%, #0e044b 100%);
+  background-image: linear-gradient(-120deg, #850808b0 0%, #0E044B 100%);
   z-index: 1;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4386,8 +4383,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transform: translateY(0);
 }
 
-/* ------- */
+#landingContent{
+  color: white;
+}
 
+/* ------- */
+/* 
 .form-group {
   display: flex;
   flex-direction: row;
@@ -4422,4 +4423,4 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .form-group input[type="radio"]:focus + label:before {
   outline: none;
   box-shadow: 0 0 0 2px #5e2ced30;
-}
+} */
