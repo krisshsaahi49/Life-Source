@@ -1,66 +1,3 @@
-# from fastapi import FastAPI, Depends
-# from sqlalchemy.orm import Session
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy import create_engine
-
-# app = FastAPI()
-
-
-# # Replace this with your PostgreSQL server URL
-# DATABASE_URL = "postgresql://postgres:o83714ElKCGvMJYk@db.rglfwncykgsxjvmwjfgz.supabase.co:5432/postgres"
-
-# # Create the database engine
-# engine = create_engine(DATABASE_URL)
-
-# # Create a sessionmaker to create sessions to the database
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# # Dependency to get a database session
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
-# @app.get("/")
-# def read_root(db: Session = Depends(get_db)):
-#     # Do something with the database session
-#     return {"Hello": "World"}
-
-# @app.get('/hello')
-# def root():
-#     return {'message': 'Hello Krissh'}
-
-
-
-# @app.on_event("startup")
-# async def startup():
-#     # Connect to the PostgreSQL database
-#     app.state.pg_pool = await asyncpg.create_pool(dsn=DATABASE_URL)
-
-# @app.on_event("shutdown")
-# async def shutdown():
-#     # Close the PostgreSQL database connection pool
-#     await app.state.pg_pool.close()
-
-# @app.get("/donor")
-# async def table_data():
-#     async with app.state.pg_pool.acquire() as conn:
-#         # Execute a SELECT statement on the table you want to display
-#         rows = await conn.fetch("SELECT * FROM donor")
-#         # Return the data as a list of dictionaries
-#         return [dict(row) for row in rows]
-    
-# @app.get("/recipient")
-# async def table_data():
-#     async with app.state.pg_pool.acquire() as conn:
-#         # Execute a SELECT statement on the table you want to display
-#         rows = await conn.fetch("SELECT * FROM recipient")
-#         # Return the data as a list of dictionaries
-#         return [dict(row) for row in rows]
-    
-
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -107,7 +44,6 @@ def get_db():
 
 @app.get("/")
 def read_root(db: Session = Depends(get_db)):
-    # Do something with the database session
     return {"Hello": "World"}
 
 @app.get('/hello')
@@ -125,7 +61,8 @@ async def startup():
 async def shutdown():
     # Close the PostgreSQL database connection pool
     await app.state.pg_pool.close()
-
+# ----------------------------------------------------------------------------------------------------------------
+# User CRUD
 # Define database model
 class User(Base):
     __tablename__ = "users"
@@ -162,7 +99,7 @@ async def table_data():
         # Return the data as a list of dictionaries
         return [dict(row) for row in rows]
     
-
+# ----------------------------------------------------------------------------------------------------------------
 # Donor CRUD
 # Define database model
 class Donor(Base):
@@ -198,9 +135,9 @@ class DonorCreate(BaseModel):
     weight: int
     testedCovid: bool
     testedHiv: bool
-    lasttimeDonatedblood: Optional[str] = None
-    anyundergoingMedication: Optional[str] = None
-    anyotherHealthissue: Optional[str] = None
+    lasttimeDonatedblood: str
+    anyundergoingMedication: str
+    anyotherHealthissue: str
 
 # Create endpoint to handle POST requests to /signup
 @app.post("/donor-signup")
@@ -210,6 +147,46 @@ def create_donor(donor: DonorCreate, db: SessionLocal = Depends(get_db)):
                           height = donor.height, weight = donor.weight, testedCovid = donor.testedCovid, testedHiv = donor.testedHiv,
                           lasttimeDonatedblood = donor.lasttimeDonatedblood, anyundergoingMedication = donor.anyundergoingMedication,
                           anyotherHealthissue = donor.anyotherHealthissue)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+# ----------------------------------------------------------------------------------------------------------------
+# Recipient CRUD
+# Define database model
+class Recipient(Base):
+    __tablename__ = "recipient"
+    id = Column(Integer, primary_key=True, index=True)
+    password = Column(String)
+    gender = Column(String)
+    firstName = Column(String)
+    lastName = Column(String)
+    userName = Column(String, unique=True, index=True)
+    emailID = Column(String, unique=True, index=True)
+    contactNo = Column(Integer)
+    age = Column(Integer)
+    bloodgroup = Column(String)
+
+
+# Define request body schema
+class RecipientCreate(BaseModel):
+    password: str
+    gender: str
+    firstName: str
+    lastName: str
+    userName: str
+    emailID: str
+    contactNo: int
+    age: int
+    bloodgroup : str
+
+# Create endpoint to handle POST requests to /signup
+@app.post("/recipient-signup")
+def create_recipient(recipient: RecipientCreate, db: SessionLocal = Depends(get_db)):
+    db_user = Recipient(password=recipient.password, gender = recipient.gender, firstName = recipient.firstName, lastName = recipient.lastName,
+                          userName = recipient.userName, emailID = recipient.emailID, contactNo = recipient.contactNo, age = recipient.age,
+                         bloodgroup = recipient.bloodgroup)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
