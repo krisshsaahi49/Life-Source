@@ -21,9 +21,9 @@ class EventTeam extends Component{
                     <h2 className="wow fadeInUp" data-wow-delay="0.2s"><span>Our Dynamic Team</span></h2>
                 </div>
                 <Slider ref={c => (this.slider = c)} className="event_team_slider" {...settings}>
-                    <EventTeamItem image="team_01.jpg" name="Krishna Saahi Yavana" post="Backend Developer"/>
-                    <EventTeamItem image="team_01.jpg" name="Chinmaie Tiyyagura" post="Frontend Developer"/>
-                    <EventTeamItem image="team_01.jpg" name="Uma Sowmya Puppala" post="Database Adminstrator"/>
+                    <EventTeamItem image="saahi.jpeg" name="Krishna Saahi Yavana" post="Backend Developer"/>
+                    <EventTeamItem image="chinnu.jpg" name="Chinmaie Tiyyagura" post="Frontend Developer"/>
+                    <EventTeamItem image="uma1.JPG" name="Uma Sowmya Puppala" post="Database Adminstrator"/>
                 </Slider>
             </div>
         </section>
