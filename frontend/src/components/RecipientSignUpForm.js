@@ -56,7 +56,7 @@ const RecipientSignUpForm = () => {
                     <br /> be part of our <br />
                     <span className="f_700">amazing</span> community
                   </h2>
-                  <Link exact title="Faq" className="nav-link" to="/SignIn">
+                  <Link exact title="Faq" className="nav-link" to="/RecipientSignIn">
                     <button
                       type="submit"
                       className="btn_three sign_btn_transparent"
@@ -190,9 +190,8 @@ const RecipientSignUpForm = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                    <button type="submit" className="btn_three">
-                        Sign Up
-                      </button>
+                    <Link exact title="donorOrRecipientPage" className="nav-link" to='/DonorOrRecipientPage'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>
+
                       <div className="social_text d-flex ">
                         <div className="lead-text">Or Sign up Using</div>
                         <ul className="list-unstyled social_tag mb-0">

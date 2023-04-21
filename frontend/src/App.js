@@ -4,14 +4,16 @@ import Contact from "./Pages/Contact";
 import ScrollToTopRoute from "./ScrollToTopRoute";
 import HomeEvent from "./Pages/Home-event";
 import Faq from "./Pages/Faq";
-import SignIn from "./Pages/SignIn";
-import SignUp from "./Pages/SignUp";
+import DonorSignUp from "./Pages/DonorSignUp";
 // import NotFound from "./Pages/404";
 import { animateScroll } from "react-scroll";
 import RecipientSignUp from "./Pages/RecipientSignUp";
 import DonorOrRecipientPage from "./Pages/DonorOrRecipientPage";
 import TermsOfUse from "./components/Footer/TermsOfUse";
 import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
+import Login from "./Pages/Login";
+import DonorSignIn from "./Pages/DonorSignIn";
+import RecipientSignIn from "./Pages/RecipientSignIn";
 
 
 class App extends Component {
@@ -30,8 +32,9 @@ class App extends Component {
         <Switch>
           <ScrollToTopRoute exact={true} path={"/"} component={HomeEvent} />
           <ScrollToTopRoute exact={true} path={"/Faq"} component={Faq} />
-          <ScrollToTopRoute exact={true} path={"/SignIn"} component={SignIn} />
-          <ScrollToTopRoute exact={true} path={"/SignUp"} component={SignUp} />
+          <ScrollToTopRoute exact={true} path={"/DonorSignIn"} component={DonorSignIn} />
+          <ScrollToTopRoute exact={true} path={"/RecipientSignIn"} component={RecipientSignIn} />
+          <ScrollToTopRoute exact={true} path={"/DonorSignUp"} component={DonorSignUp} />
           <ScrollToTopRoute exact={true} path={"/RecipientSignUp"} component={RecipientSignUp} />
           <ScrollToTopRoute
             exact={true}
@@ -43,6 +46,7 @@ class App extends Component {
             path={"/DonorOrRecipientPage"}
             component={DonorOrRecipientPage}
           />
+          <ScrollToTopRoute exact={true} path={"/LogIn"} component={Login} />
           <ScrollToTopRoute exact={true} path={"/terms"} component={TermsOfUse} />
           <ScrollToTopRoute exact={true} path={"/policy"} component={PrivacyPolicy} />
         </Switch>
