@@ -4,11 +4,10 @@ import EventTeam from "../components/Team/EventTeam";
 import About from "./About";
 import Mission from "./Mission";
 import Contact from "./Contact";
-import Donor from "./Donor";
-import Recipient from "./Recipient";
 import CustomNavbar from "../components/CustomNavbar";
 
-const homesupport = () => {
+
+const HomeEvent = () => {
   return (
     <div className="body_wrapper">
       <CustomNavbar
@@ -21,10 +20,8 @@ const homesupport = () => {
       <About />
       <Mission />
       <EventTeam />
-      <Donor/>
-      <Recipient/>
       <Contact />
     </div>
   );
 };
-export default homesupport;
+export default HomeEvent;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const SignUpForm = () => {
+const DonorSignUpForm = () => {
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [userName, setUsername] = useState("");
@@ -70,7 +70,7 @@ const SignUpForm = () => {
                     <br /> be part of our <br />
                     <span className="f_700">amazing</span> community
                   </h2>
-                  <Link exact title="Faq" className="nav-link" to="/SignIn">
+                  <Link exact title="Faq" className="nav-link" to="/DonorSignIn">
                     <button
                       type="submit"
                       className="btn_three sign_btn_transparent"
@@ -288,9 +288,8 @@ const SignUpForm = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                     <button type="submit" className="btn_three">
-                        Sign Up
-                      </button>
+                    <Link exact title="donorOrRecipientPage" className="nav-link" to='/DonorOrRecipientPage'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>
+
 
                      
                       <div className="social_text d-flex ">
@@ -324,4 +323,4 @@ const SignUpForm = () => {
       </section>
   );
 };
-export default SignUpForm;
+export default DonorSignUpForm;

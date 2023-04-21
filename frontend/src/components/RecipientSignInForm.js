@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 
-const SignInFrom =()=>{
+const RecipientSignInFrom =()=>{
     return(
         <section className="sign_in_area bg_color sec_pad">
             <div className="container">
@@ -12,7 +12,7 @@ const SignInFrom =()=>{
                             <div className="sign_info_content">
                                 <h3 className="f_p f_600 f_size_24 t_color3 mb_40">First time here?</h3>
                                 <h2 className="f_p f_400 f_size_30 mb-30">Join us now and be a<br/> <span className="f_700">lifesaver</span></h2>
-                                <Link exact title="signUp" className="nav-link" to='/SignUp'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>
+                                <Link exact title="recipientSignUp" className="nav-link" to='/RecipientSignUp'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>
                             </div>
                         </div>
                         <div className="col-lg-7">
@@ -39,7 +39,8 @@ const SignInFrom =()=>{
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <button type="submit" className="btn_three">Sign in</button>
+                                    <Link exact title="donorOrRecipientPage" className="nav-link" to='/DonorOrRecipientPage'><button type="submit" className="btn_three sign_btn_transparent">Sign In</button></Link>
+
                                         <div className="social_text d-flex ">
                                             <div className="lead-text">Don't have an account?</div>
                                             <ul className="list-unstyled social_tag mb-0">
@@ -58,4 +59,4 @@ const SignInFrom =()=>{
         </section>
     )
 }
-export default SignInFrom;
+export default RecipientSignInFrom;
