@@ -18,8 +18,8 @@ const DonorSignUpForm = () => {
   const [lasttimeDonatedblood, setDonateddate] = useState("");
   const [anyundergoingMedication, setMedications] = useState("");
   const [anyotherHealthissue, setHealthissues] = useState("");
-  const[testedCovid, setTestedCovid] = useState(false)
-  const[testedHiv, setTestedHiv] = useState(false)
+  const [testedCovid, setTestedCovid] = useState(false);
+  const [testedHiv, setTestedHiv] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,15 +48,23 @@ const DonorSignUpForm = () => {
         anyotherHealthissue,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        if (response.status === 200) {
+          // Store user session data in localStorage
+          localStorage.setItem("isLoggedIn", true);
+          window.location = "/DonorMainPage";
+        } else {
+          alert("Invalid Signup details");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
       });
   };
 
   return (
-      <section className="sign_in_area bg_color sec_pad">
-        <form onSubmit={handleSubmit}>
+    <section className="sign_in_area bg_color sec_pad">
+      <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="sign_info">
             <div className="row">
@@ -70,7 +78,12 @@ const DonorSignUpForm = () => {
                     <br /> be part of our <br />
                     <span className="f_700">amazing</span> community
                   </h2>
-                  <Link exact title="Faq" className="nav-link" to="/DonorSignIn">
+                  <Link
+                    exact
+                    title="Faq"
+                    className="nav-link"
+                    to="/DonorSignIn"
+                  >
                     <button
                       type="submit"
                       className="btn_three sign_btn_transparent"
@@ -288,10 +301,12 @@ const DonorSignUpForm = () => {
                       </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                    <Link exact title="donorMainPage" className="nav-link" to='/DonorMainPage'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>
-
-
-                     
+                      <button
+                        type="submit"
+                        className="btn_three sign_btn_transparent"
+                      >
+                        Sign Up
+                      </button>
                       <div className="social_text d-flex ">
                         <div className="lead-text">Or Sign up Using</div>
                         <ul className="list-unstyled social_tag mb-0">
@@ -319,8 +334,8 @@ const DonorSignUpForm = () => {
             </div>
           </div>
         </div>
-        </form>
-      </section>
+      </form>
+    </section>
   );
 };
 export default DonorSignUpForm;

@@ -35,6 +35,8 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Dependency to get a database session
+
+
 def get_db():
     db = SessionLocal()
     try:
@@ -42,20 +44,22 @@ def get_db():
     finally:
         db.close()
 
+
 @app.get("/")
 def read_root(db: Session = Depends(get_db)):
     return {"Hello": "World"}
+
 
 @app.get('/hello')
 def root():
     return {'message': 'Hello Krissh'}
 
 
-
 @app.on_event("startup")
 async def startup():
     # Connect to the PostgreSQL database
     app.state.pg_pool = await asyncpg.create_pool(dsn=SQLALCHEMY_DATABASE_URL)
+
 
 @app.on_event("shutdown")
 async def shutdown():
@@ -64,6 +68,8 @@ async def shutdown():
 # ----------------------------------------------------------------------------------------------------------------
 # User CRUD
 # Define database model
+
+
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
@@ -72,15 +78,20 @@ class User(Base):
     password = Column(String)
 
 # Define request body schema
+
+
 class UserCreate(BaseModel):
     username: str
     email: str
     password: str
 
 # Create endpoint to handle POST requests to /signup
+
+
 @app.post("/signup")
 def create_user(user: UserCreate, db: SessionLocal = Depends(get_db)):
-    db_user = User(username=user.username, email=user.email, password=user.password)
+    db_user = User(username=user.username,
+                   email=user.email, password=user.password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -91,6 +102,7 @@ def create_user(user: UserCreate, db: SessionLocal = Depends(get_db)):
 def root():
     return {'message': 'Hello Krissh'}
 
+
 @app.get("/donor")
 async def table_data():
     async with app.state.pg_pool.acquire() as conn:
@@ -98,10 +110,12 @@ async def table_data():
         rows = await conn.fetch("SELECT * FROM donor")
         # Return the data as a list of dictionaries
         return [dict(row) for row in rows]
-    
+
 # ----------------------------------------------------------------------------------------------------------------
 # Donor CRUD
 # Define database model
+
+
 class Donor(Base):
     __tablename__ = "donor"
     id = Column(Integer, primary_key=True, index=True)
@@ -122,6 +136,8 @@ class Donor(Base):
     anyotherHealthissue = Column(String)
 
 # Define request body schema
+
+
 class DonorCreate(BaseModel):
     password: str
     gender: str
@@ -140,13 +156,15 @@ class DonorCreate(BaseModel):
     anyotherHealthissue: str
 
 # Create endpoint to handle POST requests to /signup
+
+
 @app.post("/donor-signup")
 def create_donor(donor: DonorCreate, db: SessionLocal = Depends(get_db)):
-    db_user = Donor(password=donor.password, gender = donor.gender, firstName = donor.firstName, lastName = donor.lastName,
-                          userName = donor.userName, emailID = donor.emailID, contactNo = donor.contactNo, age = donor.age,
-                          height = donor.height, weight = donor.weight, testedCovid = donor.testedCovid, testedHiv = donor.testedHiv,
-                          lasttimeDonatedblood = donor.lasttimeDonatedblood, anyundergoingMedication = donor.anyundergoingMedication,
-                          anyotherHealthissue = donor.anyotherHealthissue)
+    db_user = Donor(password=donor.password, gender=donor.gender, firstName=donor.firstName, lastName=donor.lastName,
+                    userName=donor.userName, emailID=donor.emailID, contactNo=donor.contactNo, age=donor.age,
+                    height=donor.height, weight=donor.weight, testedCovid=donor.testedCovid, testedHiv=donor.testedHiv,
+                    lasttimeDonatedblood=donor.lasttimeDonatedblood, anyundergoingMedication=donor.anyundergoingMedication,
+                    anyotherHealthissue=donor.anyotherHealthissue)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -179,15 +197,51 @@ class RecipientCreate(BaseModel):
     emailID: str
     contactNo: int
     age: int
-    bloodgroup : str
+    bloodgroup: str
 
 # Create endpoint to handle POST requests to /signup
 @app.post("/recipient-signup")
 def create_recipient(recipient: RecipientCreate, db: SessionLocal = Depends(get_db)):
-    db_user = Recipient(password=recipient.password, gender = recipient.gender, firstName = recipient.firstName, lastName = recipient.lastName,
-                          userName = recipient.userName, emailID = recipient.emailID, contactNo = recipient.contactNo, age = recipient.age,
-                         bloodgroup = recipient.bloodgroup)
+    db_user = Recipient(password=recipient.password, gender=recipient.gender, firstName=recipient.firstName, lastName=recipient.lastName,
+                        userName=recipient.userName, emailID=recipient.emailID, contactNo=recipient.contactNo, age=recipient.age,
+                        bloodgroup=recipient.bloodgroup)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
+
+# Donor sign-in API
+class DonorSignIn(BaseModel):
+    email: str
+    password: str
+
+@app.post("/donor-login")
+def donor_login(sign_in: DonorSignIn, db: SessionLocal = Depends(get_db)):
+    user = db.query(Donor).filter_by(emailID=sign_in.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if not verify_password(sign_in.password, user.password):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    # return user data after successful login
+    return user
+
+
+# Recipient sign-in API
+class RecipientSignIn(BaseModel):
+    email: str
+    password: str
+
+@app.post("/recipient-login")
+def recipient_login(sign_in: RecipientSignIn, db: SessionLocal = Depends(get_db)):
+    user = db.query(Recipient).filter_by(emailID=sign_in.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if not verify_password(sign_in.password, user.password):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    # return user data after successful login
+    return user
+
+def verify_password(password1, password2):
+    # implementation of password verification logic
+    # compare password1 and password2, and return True or False based on whether they match or not
+    return password1 == password2
