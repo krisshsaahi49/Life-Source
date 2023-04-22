@@ -34,11 +34,19 @@ const RecipientSignUpForm = () => {
         age,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  };
+    .then((response) => {
+      if (response.status === 200) {
+        // Store user session data in localStorage
+        localStorage.setItem("isLoggedIn", true);
+        window.location = "/DonorMainPage";
+      } else {
+        alert("Invalid Signup details");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
 
   return (
     <section className="sign_in_area bg_color sec_pad">
