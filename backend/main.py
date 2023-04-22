@@ -121,6 +121,7 @@ class Donor(Base):
     id = Column(Integer, primary_key=True, index=True)
     password = Column(String)
     gender = Column(String)
+    bloodgroup = Column(String)
     firstName = Column(String)
     lastName = Column(String)
     userName = Column(String, unique=True, index=True)
@@ -136,11 +137,10 @@ class Donor(Base):
     anyotherHealthissue = Column(String)
 
 # Define request body schema
-
-
 class DonorCreate(BaseModel):
     password: str
     gender: str
+    bloodgroup : str
     firstName: str
     lastName: str
     userName: str
@@ -164,7 +164,7 @@ def create_donor(donor: DonorCreate, db: SessionLocal = Depends(get_db)):
                     userName=donor.userName, emailID=donor.emailID, contactNo=donor.contactNo, age=donor.age,
                     height=donor.height, weight=donor.weight, testedCovid=donor.testedCovid, testedHiv=donor.testedHiv,
                     lasttimeDonatedblood=donor.lasttimeDonatedblood, anyundergoingMedication=donor.anyundergoingMedication,
-                    anyotherHealthissue=donor.anyotherHealthissue)
+                    anyotherHealthissue=donor.anyotherHealthissue, bloodgroup=donor.bloodgroup)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -247,3 +247,9 @@ def verify_password(password1, password2):
     # implementation of password verification logic
     # compare password1 and password2, and return True or False based on whether they match or not
     return password1 == password2
+
+# Create endpoint to handle GET requests to /donor-list/<bloodgroup>
+@app.get("/donor-list/{bloodgroup}")
+def get_donor_list_by_bloodgroup(bloodgroup: str, db: Session = Depends(get_db)):
+    donors = db.query(Donor).filter(Donor.bloodgroup == bloodgroup).all()
+    return {"donors": donors}

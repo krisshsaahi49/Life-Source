@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../assets/recipientMain.css'
+import "../assets/recipientMain.css";
 import RecipientProfile from "./RecipientProfile";
 
 const RecipientMainPage = () => {
@@ -13,25 +13,34 @@ const RecipientMainPage = () => {
 
   // Function to handle search button click
   const handleSearchClick = () => {
-    // Here you can implement your logic to fetch donor names with the selected blood group from a database or API
-    // For demonstration purposes, I am setting a dummy array of donor names
-    const dummyDonors = ["Donor1", "Donor2", "Donor3"]; 
-    setDonors(dummyDonors);
+    // fetch donor list with the selected blood group from the backend
+    fetch(`http://localhost:8000/donor-list/${bloodGroup}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDonors(data.donors);
+        console.log(data.donors);
+      })
+      .catch((error) => {
+        console.error("Error fetching donor list:", error);
+      });
   };
 
   // Function to handle request button click
   const handleRequestClick = (donorName) => {
-    // Here you can implement your logic to send a request to the selected donor for blood donation
     // For demonstration purposes, I am showing an alert with the donor name
     alert(`Request sent to ${donorName} for blood donation.`);
   };
 
   return (
     <div id="donor" className="wrapper">
-        <RecipientProfile/>
-       <h2>Recipient Page</h2>
+      <RecipientProfile />
+      <h2>Recipient Page</h2>
       <label htmlFor="bloodGroup">Select Blood Group:</label>
-      <select id="bloodGroup" value={bloodGroup} onChange={handleBloodGroupChange}>
+      <select
+        id="bloodGroup"
+        value={bloodGroup}
+        onChange={handleBloodGroupChange}
+      >
         <option value="">--Select Blood Group--</option>
         <option value="A+">A+</option>
         <option value="B+">B+</option>
@@ -46,10 +55,10 @@ const RecipientMainPage = () => {
       <div>
         <h3>Donors with {bloodGroup} blood group:</h3>
         <ul>
-          {donors.map((donorName, index) => (
+          {donors.map((donor, index) => (
             <li key={index}>
-              {donorName}
-              <button onClick={() => handleRequestClick(donorName)}>Request</button>
+              {donor.firstName} {donor.lastName}
+              <button onClick={() => handleRequestClick(donor)}>Request</button>
             </li>
           ))}
         </ul>
