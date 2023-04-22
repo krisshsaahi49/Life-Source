@@ -1,0 +1,83 @@
+/* Form container */
+.form-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Label styles */
+  .f_p {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  .text_c {
+    text-align: center;
+  }
+  
+  .f_400 {
+    font-weight: 400;
+  }
+  
+  /* Input field styles */
+  .text_box {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  /* Submit button styles */
+  input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Placeholder styles */
+  ::-webkit-input-placeholder {
+    opacity: 0.7;
+  }
+  
+  ::-moz-placeholder {
+    opacity: 0.7;
+  }
+  
+  :-ms-input-placeholder {
+    opacity: 0.7;
+  }
+  
+  :-moz-placeholder {
+    opacity: 0.7;
+  }
+  
+  /* Select dropdown styles */
+  select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+  }
+  

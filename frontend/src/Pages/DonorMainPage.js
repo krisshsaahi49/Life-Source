@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DonorProfile from "./DonorProfile";
 
 const DonorMainPage = () => {
   const [requests, setRequests] = useState([]); // State for storing incoming requests
@@ -29,6 +30,7 @@ const DonorMainPage = () => {
 
   return (
     <div className="wrapper">
+        <DonorProfile/>
       <h2>Donor Page</h2>
       {requests.length > 0 ? (
         <div>

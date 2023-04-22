@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Breadcrumb from "../components/Breadcrumb";
 import '../assets/recipientMain.css'
-import Profile from "./Profile";
+import RecipientProfile from "./RecipientProfile";
 
 const RecipientMainPage = () => {
   const [bloodGroup, setBloodGroup] = useState(""); // State for selected blood group
@@ -29,7 +28,7 @@ const RecipientMainPage = () => {
 
   return (
     <div id="donor" className="wrapper">
-        <Profile/>
+        <RecipientProfile/>
        <h2>Recipient Page</h2>
       <label htmlFor="bloodGroup">Select Blood Group:</label>
       <select id="bloodGroup" value={bloodGroup} onChange={handleBloodGroupChange}>
