@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Contact from "./Pages/Contact";
 import ScrollToTopRoute from "./ScrollToTopRoute";
@@ -16,6 +16,8 @@ import DonorSignIn from "./Pages/DonorSignIn";
 import RecipientSignIn from "./Pages/RecipientSignIn";
 import RecipientMainPage from "./Pages/RecipientMainPage";
 import DonorMainPage from "./Pages/DonorMainPage";
+import UpdateRecipientProfile from "./Pages/UpdateRecipientProfile";
+import UpdateDonorProfile from "./Pages/UpdateDonorProfile";
 
 
 class App extends Component {
@@ -57,6 +59,16 @@ class App extends Component {
             exact={true}
             path={"/DonorMainPage"}
             component={DonorMainPage}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/UpdateRecipientProfile"}
+            component={UpdateRecipientProfile}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/UpdateDonorProfile"}
+            component={UpdateDonorProfile}
           />
           <ScrollToTopRoute exact={true} path={"/LogIn"} component={Login} />
           <ScrollToTopRoute exact={true} path={"/terms"} component={TermsOfUse} />
