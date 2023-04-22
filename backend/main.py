@@ -214,6 +214,7 @@ def create_recipient(recipient: RecipientCreate, db: SessionLocal = Depends(get_
 class DonorSignIn(BaseModel):
     email: str
     password: str
+    remember_me: Optional[bool] = False
 
 @app.post("/donor-login")
 def donor_login(sign_in: DonorSignIn, db: SessionLocal = Depends(get_db)):
@@ -230,6 +231,7 @@ def donor_login(sign_in: DonorSignIn, db: SessionLocal = Depends(get_db)):
 class RecipientSignIn(BaseModel):
     email: str
     password: str
+    remember_me: Optional[bool] = False
 
 @app.post("/recipient-login")
 def recipient_login(sign_in: RecipientSignIn, db: SessionLocal = Depends(get_db)):
