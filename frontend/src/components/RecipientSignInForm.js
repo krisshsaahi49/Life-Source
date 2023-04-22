@@ -39,7 +39,7 @@ const RecipientSignInFrom =()=>{
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between align-items-center">
-                                    <Link exact title="donorOrRecipientPage" className="nav-link" to='/DonorOrRecipientPage'><button type="submit" className="btn_three sign_btn_transparent">Sign In</button></Link>
+                                    <Link exact title="recipientMainPage" className="nav-link" to='/RecipientMainPage'><button type="submit" className="btn_three sign_btn_transparent">Sign In</button></Link>
 
                                         <div className="social_text d-flex ">
                                             <div className="lead-text">Don't have an account?</div>

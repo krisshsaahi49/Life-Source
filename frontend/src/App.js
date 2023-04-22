@@ -14,6 +14,8 @@ import PrivacyPolicy from "./components/Footer/PrivacyPolicy";
 import Login from "./Pages/Login";
 import DonorSignIn from "./Pages/DonorSignIn";
 import RecipientSignIn from "./Pages/RecipientSignIn";
+import RecipientMainPage from "./Pages/RecipientMainPage";
+import DonorMainPage from "./Pages/DonorMainPage";
 
 
 class App extends Component {
@@ -45,6 +47,16 @@ class App extends Component {
             exact={true}
             path={"/DonorOrRecipientPage"}
             component={DonorOrRecipientPage}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/RecipientMainPage"}
+            component={RecipientMainPage}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/DonorMainPage"}
+            component={DonorMainPage}
           />
           <ScrollToTopRoute exact={true} path={"/LogIn"} component={Login} />
           <ScrollToTopRoute exact={true} path={"/terms"} component={TermsOfUse} />
