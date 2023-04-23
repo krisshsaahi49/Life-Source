@@ -9,7 +9,7 @@ const RecipientSignInFrom = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Make a POST request to your backend API with the form data
-    fetch("http://localhost:8000/recipient-login", {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "/recipient-login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

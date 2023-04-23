@@ -25,7 +25,7 @@ const DonorSignUpForm = () => {
     event.preventDefault();
 
     // Send POST request to backend API to create new user
-    fetch("http://localhost:8000/donor-signup", {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "/donor-signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -18,7 +18,7 @@ const RecipientSignUpForm = () => {
     event.preventDefault();
 
     // Send POST request to backend API to create new user
-    fetch("http://localhost:8000/recipient-signup", {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "/recipient-signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

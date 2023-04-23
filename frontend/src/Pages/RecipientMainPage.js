@@ -14,7 +14,7 @@ const RecipientMainPage = () => {
   // Function to handle search button click
   const handleSearchClick = () => {
     // fetch donor list with the selected blood group from the backend
-    fetch(`http://localhost:8000/donor-list/${bloodGroup}`)
+    fetch(process.env.REACT_APP_API_ENDPOINT + `/donor-list/${bloodGroup}`)
       .then((response) => response.json())
       .then((data) => {
         setDonors(data.donors);
