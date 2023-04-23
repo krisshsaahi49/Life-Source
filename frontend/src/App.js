@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Contact from "./Pages/Contact";
 import ScrollToTopRoute from "./ScrollToTopRoute";
 import HomeEvent from "./Pages/Home-event";
@@ -34,6 +34,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
+          <Route exact path="/RecipientMainPage" component={RecipientMainPage} />
           <ScrollToTopRoute exact={true} path={"/"} component={HomeEvent} />
           <ScrollToTopRoute exact={true} path={"/Faq"} component={Faq} />
           <ScrollToTopRoute exact={true} path={"/DonorSignIn"} component={DonorSignIn} />

@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { useState } from "react";
 
 const RecipientSignUpForm = () => {
+  const history = useHistory();
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [userName, setUsername] = useState("");
@@ -38,7 +39,8 @@ const RecipientSignUpForm = () => {
       if (response.status === 200) {
         // Store user session data in localStorage
         localStorage.setItem("isLoggedIn", true);
-        window.location = "/DonorMainPage";
+        // window.location = "/DonorMainPage";
+        history.push("/DonorMainPage")
       } else {
         alert("Invalid Signup details");
       }
