@@ -22,6 +22,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://life-source-backend.onrender.com"
 ]
 app.add_middleware(
     CORSMiddleware,
