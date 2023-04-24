@@ -297,10 +297,6 @@ const DonorSignUpForm = () => {
                           conditions of this website
                         </label>
                       </div>
-
-                      <div className="forgotten-password">
-                        <a href="/#">Forgot Password?</a>
-                      </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
                       <button

@@ -9,7 +9,7 @@ const RecipientSignUp = () => {
     return(
         <div className="body_wrapper">
             <CustomNavbar slogo="sticky_logo" mClass="menu_four" nClass="w_menu ml-auto mr-auto"/>
-            <Breadcrumb breadcrumbClass="breadcrumb_area" imgName="breadcrumb/banner_bg.png" Ptitle="Sign Up" Pdescription="Thank you for taking the first step towards potentially saving your life or the life of a loved one"/>
+            <Breadcrumb breadcrumbClass="breadcrumb_area" imgName="breadcrumb/banner_bg.png" Ptitle="Recipient Sign Up" Pdescription="Thank you for taking the first step towards potentially saving your life or the life of a loved one"/>
             <RecipientSignUpForm/>
             <FooterTwo FooterData={FooterData}/>
         </div>

@@ -9,7 +9,7 @@ const DonorSignUp = () => {
     return(
         <div className="body_wrapper">
             <CustomNavbar slogo="sticky_logo" mClass="menu_four" nClass="w_menu ml-auto mr-auto"/>
-            <Breadcrumb breadcrumbClass="breadcrumb_area" imgName="breadcrumb/banner_bg.png" Ptitle="Sign Up" Pdescription="The blood you donate will give someone another chance to live. One day that someone may be a close relative, a friend, a loved one—or even you."/>
+            <Breadcrumb breadcrumbClass="breadcrumb_area" imgName="breadcrumb/banner_bg.png" Ptitle="Donor Sign Up" Pdescription="The blood you donate will give someone another chance to live. One day that someone may be a close relative, a friend, a loved one—or even you."/>
             <DonorSignUpForm/>
             <FooterTwo FooterData={FooterData}/>
         </div>

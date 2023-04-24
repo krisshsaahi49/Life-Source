@@ -18,6 +18,8 @@ import RecipientMainPage from "./Pages/RecipientMainPage";
 import DonorMainPage from "./Pages/DonorMainPage";
 import UpdateRecipientProfile from "./Pages/UpdateRecipientProfile";
 import UpdateDonorProfile from "./Pages/UpdateDonorProfile";
+import ChangePassword from "./Pages/ChangePassword";
+import ForgotPassword from "./Pages/ForgotPassword";
 
 
 class App extends Component {
@@ -70,6 +72,16 @@ class App extends Component {
             exact={true}
             path={"/UpdateDonorProfile"}
             component={UpdateDonorProfile}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/ChangePassword"}
+            component={ChangePassword}
+          />
+          <ScrollToTopRoute
+            exact={true}
+            path={"/ForgotPassword"}
+            component={ForgotPassword}
           />
           <ScrollToTopRoute exact={true} path={"/LogIn"} component={Login} />
           <ScrollToTopRoute exact={true} path={"/terms"} component={TermsOfUse} />
