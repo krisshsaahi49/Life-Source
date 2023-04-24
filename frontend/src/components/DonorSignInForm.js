@@ -101,9 +101,14 @@ return (
                         Keep me Signed in
                       </label>
                     </div>
-                    <div className="forgotten-password">
-                      <a href="/#">Forgot Password?</a>
-                    </div>
+                    <Link
+                  exact
+                  title="forgotPassword"
+                  className="forgotten-password"
+                  to="/ForgotPassword"
+                >
+                 <a href="/#">Forgot Password?</a>
+                </Link>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <button type="submit" className="btn_three">
@@ -111,11 +116,11 @@ return (
                     </button>
                     <Link
                       exact
-                      title="donorSignIn"
+                      title="recipientSignIn"
                       className="nav-link"
-                      to="/DonorSignIn"
+                      to="/RecipientSignIn"
                     >
-                      <span className="f_p">Sign in as Donor</span>
+                      <span className="f_p">Sign in as Recipient</span>
                     </Link>
                   </div>
                 </form>

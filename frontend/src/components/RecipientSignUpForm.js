@@ -194,10 +194,6 @@ const RecipientSignUpForm = () => {
                           conditions of this website
                         </label>
                       </div>
-
-                      <div className="forgotten-password">
-                        <a href="/#">Forgot Password?</a>
-                      </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
                     <Link exact title="recipientMainPage" className="nav-link" to='/RecipientMainPage'><button type="submit" className="btn_three sign_btn_transparent">Sign Up</button></Link>

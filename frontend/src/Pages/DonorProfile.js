@@ -5,21 +5,8 @@ import "../assets/profile.css";
 const DonorProfile = () => {
   const [isOpen, setIsOpen] = useState(false); // State variable to track if dropdown is open or closed
 
-  // Function to handle change password click
-  const handleChangePasswordClick = () => {
-    // Implement your logic for changing password
-    // For demonstration purposes, you can navigate to the change password page
-    // using Link or window.location.href
-    // For example:
-    window.location.href = "/change-password";
-  };
-
   // Function to handle logout click
   const handleLogoutClick = () => {
-    // Implement your logic for logging out
-    // For demonstration purposes, you can navigate to the home page
-    // using Link or window.location.href
-    // For example:
     window.location.href = "/";
   };
 
@@ -54,12 +41,9 @@ const DonorProfile = () => {
             <Link exact title="updateDonorProfile" className="profile-button" to='/UpdateDonorProfile'>
                 <button type="submit">Update Profile</button>
             </Link>
-            <button
-              className="profile-button"
-              onClick={handleChangePasswordClick}
-            >
-              Change Password
-            </button>
+            <Link exact title="changePassword" className="profile-button" to='/ChangePassword'>
+                <button type="submit">Change Password</button>
+            </Link>
             <button className="profile-button" onClick={handleLogoutClick}>
               Logout
             </button>
