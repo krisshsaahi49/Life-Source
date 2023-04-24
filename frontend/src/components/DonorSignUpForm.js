@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 const DonorSignUpForm = () => {
+  const history = useHistory();
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [userName, setUsername] = useState("");
@@ -25,7 +26,7 @@ const DonorSignUpForm = () => {
     event.preventDefault();
 
     // Send POST request to backend API to create new user
-    fetch("http://localhost:8000/donor-signup", {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "/donor-signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -52,7 +53,8 @@ const DonorSignUpForm = () => {
         if (response.status === 200) {
           // Store user session data in localStorage
           localStorage.setItem("isLoggedIn", true);
-          window.location = "/DonorMainPage";
+          // window.location = "/DonorMainPage";
+          history.push("/DonorMainPage")
         } else {
           alert("Invalid Signup details");
         }

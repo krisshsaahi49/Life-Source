@@ -6,6 +6,15 @@ from sqlalchemy import create_engine, Column, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 import asyncpg
+from db import get_db, Base
+from db import SessionLocal
+from dotenv import load_dotenv
+
+# Load values from .env file
+load_dotenv()
+
+# Access the values using the os module
+import os
 
 app = FastAPI()
 
@@ -13,6 +22,8 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://lifesource.netlify.app",
+    "https://life-source-backend.onrender.com"
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -21,29 +32,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Set up database connection
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:o83714ElKCGvMJYk@db.rglfwncykgsxjvmwjfgz.supabase.co:5432/postgres"
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()
-
-# Create the database engine
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-
-# Create a sessionmaker to create sessions to the database
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Dependency to get a database session
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 
 @app.get("/")
 def read_root(db: Session = Depends(get_db)):
@@ -58,7 +46,7 @@ def root():
 @app.on_event("startup")
 async def startup():
     # Connect to the PostgreSQL database
-    app.state.pg_pool = await asyncpg.create_pool(dsn=SQLALCHEMY_DATABASE_URL)
+    app.state.pg_pool = await asyncpg.create_pool(dsn=os.getenv('DATABASE_URL'))
 
 
 @app.on_event("shutdown")
@@ -244,8 +232,6 @@ def recipient_login(sign_in: RecipientSignIn, db: SessionLocal = Depends(get_db)
     return user
 
 def verify_password(password1, password2):
-    # implementation of password verification logic
-    # compare password1 and password2, and return True or False based on whether they match or not
     return password1 == password2
 
 # Create endpoint to handle GET requests to /donor-list/<bloodgroup>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const RecipientSignInFrom = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // Add a state for Remember Me checkbox
@@ -9,7 +10,7 @@ const RecipientSignInFrom = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Make a POST request to your backend API with the form data
-    fetch("http://localhost:8000/recipient-login", {
+    fetch(process.env.REACT_APP_API_ENDPOINT + "/recipient-login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +25,8 @@ const RecipientSignInFrom = () => {
         if (response.status === 200) {
           // Store user session data in localStorage
           localStorage.setItem("isLoggedIn", true);
-          window.location = "/RecipientMainPage";
+          // window.location = "/RecipientMainPage";
+          history.push("/RecipientMainPage");
         } else {
           alert("Invalid Login details");
         }
