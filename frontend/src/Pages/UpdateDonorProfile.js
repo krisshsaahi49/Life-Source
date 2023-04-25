@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../assets/updateRecipientorDonor.css'
+import { useLocation } from "react-router-dom";
 
 const UpdateDonorProfile = () => {
   const [firstName, setFirstname] = useState("");
@@ -19,11 +20,13 @@ const UpdateDonorProfile = () => {
   const [anyotherHealthissue, setHealthissues] = useState("");
   const [testedCovid, setTestedCovid] = useState(false);
   const [testedHiv, setTestedHiv] = useState(false);
+  const location = useLocation();
+  const email = location.state.email??'';
 
   useEffect(() => {
     // Fetch the user's data from the database and set the state
     const fetchData = async () => {
-      const response = await fetch("http://localhost:8000/user-profile");
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT +`/donor/${email}`);
       const data = await response.json();
       setFirstname(data.firstName);
       setLastname(data.lastName);
@@ -45,12 +48,12 @@ const UpdateDonorProfile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [email]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Send PUT request to backend API to update user profile
-    fetch("http://localhost:8000/user-profile", {
+    fetch(process.env.REACT_APP_API_ENDPOINT +`/donor/${email}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -163,42 +166,6 @@ const UpdateDonorProfile = () => {
           <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
-      </div>
-      <div className="form-group text_box">
-        <label className="f_p text_c f_400">Blood Group</label>
-        <input
-          type="text"
-          value={bloodgroup}
-          onChange={(e) => setBloodgroup(e.target.value)}
-          placeholder="Blood Group"
-        />
-      </div>
-      <div className="form-group text_box">
-        <label className="f_p text_c f_400">Age</label>
-        <input
-          type="number"
-          value={age}
-          onChange={(e) => setAge(parseInt(e.target.value))}
-          placeholder="Age"
-        />
-      </div>
-      <div className="form-group text_box">
-        <label className="f_p text_c f_400">Height</label>
-        <input
-          type="text"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-          placeholder="Height"
-        />
-      </div>
-      <div className="form-group text_box">
-        <label className="f_p text_c f_400">Weight</label>
-        <input
-          type="text"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-          placeholder="Weight"
-        />
       </div>
       <div className="form-group text_box">
         <label className="f_p text_c f_400">Blood Group</label>

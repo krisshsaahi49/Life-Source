@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/profile.css";
 
-const DonorProfile = () => {
+const DonorProfile = ({email}) => {
   const [isOpen, setIsOpen] = useState(false); // State variable to track if dropdown is open or closed
 
   // Function to handle logout click
@@ -18,12 +18,6 @@ const DonorProfile = () => {
   return (
     <div className="profile-container">
       {/* Render the static profile image */}
-      <img
-        src={"./profile-image.jpeg"}
-        alt="Profile"
-        className="profile-image"
-        onClick={handleProfileNameClick}
-      />
       <div className="profile-info">
         {/* Render the profile information, such as name, email, etc. */}
         <div className="profile-text">
@@ -31,14 +25,13 @@ const DonorProfile = () => {
             onClick={handleProfileNameClick}
             style={{ cursor: "pointer" }}
           >
-            John Doe
+            {email}
           </h4>
-          <p>john.doe@example.com</p>
         </div>
         {isOpen && (
           <div className="profile-actions">
             {/* Render the buttons for updating profile, changing password, and logout */}
-            <Link exact title="updateDonorProfile" className="profile-button" to='/UpdateDonorProfile'>
+            <Link exact title="updateDonorProfile" className="profile-button" to={{ pathname: "/UpdateDonorProfile", state: { email: email } }}>
                 <button type="submit">Update Profile</button>
             </Link>
             <Link exact title="changePassword" className="profile-button" to='/ChangePassword'>

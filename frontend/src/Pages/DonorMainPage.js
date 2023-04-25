@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import DonorProfile from "./DonorProfile";
 import "../assets/donorMain.css";
 
-const DonorMainPage = () => {
+const DonorMainPage = (props) => {
   const [requests, setRequests] = useState([]); // State for storing incoming requests
-
+  const { email } = props.location.state??'';
   // Function to handle incoming request from recipient
   const handleIncomingRequest = (recipientName) => {
     // Add incoming request to the requests array
@@ -32,7 +32,7 @@ const DonorMainPage = () => {
   return (
      <div id="donor" className="wrapper">
       <h2 className="donor-welcome-header">Donor Page</h2>
-        <DonorProfile/>
+      <DonorProfile email={email}/>
       <h2 className="donor-page-header">Recipient Requests</h2>
       {requests.length > 0 ? (
         <div>
