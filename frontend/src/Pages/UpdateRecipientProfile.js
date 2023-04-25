@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import '../assets/updateRecipientorDonor.css'
+import '../assets/updateRecipientorDonor.css';
+import { useLocation } from "react-router-dom";
 
 const UpdateRecipientProfile = () => {
   const [firstName, setFirstname] = useState("");
@@ -12,11 +13,13 @@ const UpdateRecipientProfile = () => {
   const [gender, setGender] = useState("");
   const [bloodgroup, setBloodgroup] = useState("");
   const [age, setAge] = useState(0);
+  const location = useLocation();
+  const email = location.state.email??'';
 
   useEffect(() => {
     // Fetch the user's data from the database and set the state
     const fetchData = async () => {
-      const response = await fetch("http://localhost:8000/user-profile");
+      const response = await fetch(process.env.REACT_APP_API_ENDPOINT +`/recipient/${email}`);
       const data = await response.json();
       setFirstname(data.firstName);
       setLastname(data.lastName);
@@ -31,12 +34,12 @@ const UpdateRecipientProfile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [email]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Send PUT request to backend API to update user profile
-    fetch("http://localhost:8000/user-profile", {
+    fetch(process.env.REACT_APP_API_ENDPOINT +`/recipient/${email}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

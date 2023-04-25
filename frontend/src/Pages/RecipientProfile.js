@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../assets/profile.css";
 
-const RecipientProfile = () => {
+const RecipientProfile = ({email}) => {
   const [isOpen, setIsOpen] = useState(false); // State variable to track if dropdown is open or closed
-
   // Function to handle logout click
   const handleLogoutClick = () => {
-    // Implement your logic for logging out
-    // For demonstration purposes, you can navigate to the home page
-    // using Link or window.location.href
-    // For example:
     window.location.href = "/";
   };
 
@@ -35,14 +30,13 @@ const RecipientProfile = () => {
             onClick={handleProfileNameClick}
             style={{ cursor: "pointer" }}
           >
-            John Doe
+            {email}
           </h4>
-          <p>john.doe@example.com</p>
         </div>
         {isOpen && (
           <div className="profile-actions">
             {/* Render the buttons for updating profile, changing password, and logout */}
-            <Link exact title="updateRecipientProfile" className="profile-button" to='/UpdateRecipientProfile'>
+            <Link exact title="updateRecipientProfile" className="profile-button" to={{ pathname: "/UpdateRecipientProfile", state: { email: email } }}>
                 <button type="submit">Update Profile</button>
             </Link>
             <Link exact title="changePassword" className="profile-button" to='/ChangePassword'>

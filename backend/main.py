@@ -104,8 +104,6 @@ async def table_data():
 # ----------------------------------------------------------------------------------------------------------------
 # Donor CRUD
 # Define database model
-
-
 class Donor(Base):
     __tablename__ = "donor"
     id = Column(Integer, primary_key=True, index=True)
@@ -146,8 +144,6 @@ class DonorCreate(BaseModel):
     anyotherHealthissue: str
 
 # Create endpoint to handle POST requests to /signup
-
-
 @app.post("/donor-signup")
 def create_donor(donor: DonorCreate, db: SessionLocal = Depends(get_db)):
     db_user = Donor(password=donor.password, gender=donor.gender, firstName=donor.firstName, lastName=donor.lastName,
@@ -156,6 +152,51 @@ def create_donor(donor: DonorCreate, db: SessionLocal = Depends(get_db)):
                     lasttimeDonatedblood=donor.lasttimeDonatedblood, anyundergoingMedication=donor.anyundergoingMedication,
                     anyotherHealthissue=donor.anyotherHealthissue, bloodgroup=donor.bloodgroup)
     db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+# Donor sign-in API
+class DonorSignIn(BaseModel):
+    email: str
+    password: str
+    remember_me: Optional[bool] = False
+
+@app.post("/donor-login")
+def donor_login(sign_in: DonorSignIn, db: SessionLocal = Depends(get_db)):
+   # Check if the input is an email or username
+    user = None
+    if '@' in sign_in.email:
+        # If input is an email, query by email
+        user = db.query(Donor).filter_by(emailID=sign_in.email).first()
+    else:
+        # If input is a username, query by username
+        user = db.query(Donor).filter_by(userName=sign_in.email).first()
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if not verify_password(sign_in.password, user.password):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    # return user data after successful login
+    return user
+
+# Fetch donor user details by username
+@app.get("/donor/{username}")
+def get_donor_by_username(username: str, db: Session = Depends(get_db)):
+    db_user = db.query(Donor).filter(Donor.userName == username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
+
+# Update donor user profile
+@app.put("/donor/{username}")
+def update_donor_profile(username: str, donor: DonorCreate, db: Session = Depends(get_db)):
+    db_user = db.query(Donor).filter(Donor.userName == username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    update_data = donor.dict(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_user, key, value)
     db.commit()
     db.refresh(db_user)
     return db_user
@@ -175,7 +216,6 @@ class Recipient(Base):
     contactNo = Column(Integer)
     age = Column(Integer)
     bloodgroup = Column(String)
-
 
 # Define request body schema
 class RecipientCreate(BaseModel):
@@ -200,22 +240,26 @@ def create_recipient(recipient: RecipientCreate, db: SessionLocal = Depends(get_
     db.refresh(db_user)
     return db_user
 
-# Donor sign-in API
-class DonorSignIn(BaseModel):
-    email: str
-    password: str
-    remember_me: Optional[bool] = False
-
-@app.post("/donor-login")
-def donor_login(sign_in: DonorSignIn, db: SessionLocal = Depends(get_db)):
-    user = db.query(Donor).filter_by(emailID=sign_in.email).first()
-    if not user:
+# Fetch recipient user details by username
+@app.get("/recipient/{username}")
+def get_donor_by_username(username: str, db: Session = Depends(get_db)):
+    db_user = db.query(Recipient).filter(Recipient.userName == username).first()
+    if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
-    if not verify_password(sign_in.password, user.password):
-        raise HTTPException(status_code=401, detail="Incorrect password")
-    # return user data after successful login
-    return user
+    return db_user
 
+# Update recipient user profile
+@app.put("/recipient/{username}")
+def update_donor_profile(username: str, donor: RecipientCreate, db: Session = Depends(get_db)):
+    db_user = db.query(Recipient).filter(Recipient.userName == username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    update_data = donor.dict(exclude_unset=True)
+    for key, value in update_data.items():
+        setattr(db_user, key, value)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
 
 # Recipient sign-in API
 class RecipientSignIn(BaseModel):
@@ -225,13 +269,22 @@ class RecipientSignIn(BaseModel):
 
 @app.post("/recipient-login")
 def recipient_login(sign_in: RecipientSignIn, db: SessionLocal = Depends(get_db)):
-    user = db.query(Recipient).filter_by(emailID=sign_in.email).first()
+    # Check if the input is an email or username
+    user = None
+    if '@' in sign_in.email:
+        # If input is an email, query by email
+        user = db.query(Recipient).filter_by(emailID=sign_in.email).first()
+    else:
+        # If input is a username, query by username
+        user = db.query(Recipient).filter_by(userName=sign_in.email).first()
+
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     if not verify_password(sign_in.password, user.password):
         raise HTTPException(status_code=401, detail="Incorrect password")
     # return user data after successful login
     return user
+
 
 def verify_password(password1, password2):
     return password1 == password2
@@ -268,58 +321,6 @@ def create_feedback(feedback: FeedbackCreate, db: SessionLocal = Depends(get_db)
     return db_feedback
 
 # ------------------------------------------------------------------------------------------------------
-# Define request body schema for forgot password
-# class ForgotPassword(BaseModel):
-#     username: str
-#     new_password: str
-
-
-# @app.post("/forgot-password")
-# def forgot_password(forgot_password: ForgotPassword, db: SessionLocal = Depends(get_db)):
-#     username = forgot_password.username
-#     new_password = forgot_password.new_password
-
-#     # Check if the provided username exists in the database
-#     user = db.query(User).filter(User.username == username).first()
-#     if user is None:
-#         return {"error": "Username not found"}
-
-#     # Update the user's password in the database
-#     user.password = new_password
-#     db.commit()
-
-#     # Send password reset email
-#     send_password_reset_email(user.email)
-
-#     return {"message": "Password updated successfully. Please check your email for further instructions"}
-
-
-# def send_password_reset_email(email: str):
-#     # Create SMTP connection
-#     smtp_server = os.getenv('SMTP_SERVER')
-#     smtp_port = os.getenv('SMTP_PORT')
-#     smtp_username = os.getenv('SMTP_USERNAME')
-#     smtp_password = os.getenv('SMTP_PASSWORD')
-#     from_email = os.getenv('FROM_EMAIL')
-#     to_email = email
-
-#     connection = smtplib.SMTP(smtp_server, smtp_port)
-#     connection.ehlo()
-#     connection.starttls()
-#     connection.login(smtp_username, smtp_password)
-
-#     # Create email message
-#     subject = "Password Reset"
-#     body = "Your password has been reset successfully. Please login with your new password."
-#     msg = MIMEText(body)
-#     msg['Subject'] = subject
-#     msg['From'] = from_email
-#     msg['To'] = to_email
-
-#     # Send email
-#     connection.send_message(msg)
-#     connection.close()
-
 # Define request body schema for forgot password
 class ForgotPassword(BaseModel):
     email: str
