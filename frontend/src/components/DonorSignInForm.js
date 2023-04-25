@@ -26,7 +26,7 @@ const DonorSignInForm = () => {
           // Store user session data in localStorage
           localStorage.setItem("isLoggedIn", true);
           // window.location = "/DonorMainPage";
-          history.push("/DonorMainPage");
+          history.push("/DonorMainPage",{ email: email });
         } else {
           alert("Invalid Login details");
         }
