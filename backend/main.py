@@ -9,6 +9,8 @@ import asyncpg
 from db import get_db, Base
 from db import SessionLocal
 from dotenv import load_dotenv
+import smtplib
+from email.mime.text import MIMEText
 
 # Load values from .env file
 load_dotenv()
@@ -239,3 +241,152 @@ def verify_password(password1, password2):
 def get_donor_list_by_bloodgroup(bloodgroup: str, db: Session = Depends(get_db)):
     donors = db.query(Donor).filter(Donor.bloodgroup == bloodgroup).all()
     return {"donors": donors}
+
+# Define Feedback model
+class Feedback(Base):
+    __tablename__ = "feedback"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String)
+    subject = Column(String)
+    message = Column(String)
+
+# Define request body schema
+class FeedbackCreate(BaseModel):
+    name: str
+    email: str
+    subject: str
+    message: str
+
+# Create endpoint to handle POST requests to /feedback
+@app.post("/feedback")
+def create_feedback(feedback: FeedbackCreate, db: SessionLocal = Depends(get_db)):
+    db_feedback = Feedback(name=feedback.name, email=feedback.email, subject=feedback.subject, message=feedback.message)
+    db.add(db_feedback)
+    db.commit()
+    db.refresh(db_feedback)
+    return db_feedback
+
+# ------------------------------------------------------------------------------------------------------
+# Define request body schema for forgot password
+# class ForgotPassword(BaseModel):
+#     username: str
+#     new_password: str
+
+
+# @app.post("/forgot-password")
+# def forgot_password(forgot_password: ForgotPassword, db: SessionLocal = Depends(get_db)):
+#     username = forgot_password.username
+#     new_password = forgot_password.new_password
+
+#     # Check if the provided username exists in the database
+#     user = db.query(User).filter(User.username == username).first()
+#     if user is None:
+#         return {"error": "Username not found"}
+
+#     # Update the user's password in the database
+#     user.password = new_password
+#     db.commit()
+
+#     # Send password reset email
+#     send_password_reset_email(user.email)
+
+#     return {"message": "Password updated successfully. Please check your email for further instructions"}
+
+
+# def send_password_reset_email(email: str):
+#     # Create SMTP connection
+#     smtp_server = os.getenv('SMTP_SERVER')
+#     smtp_port = os.getenv('SMTP_PORT')
+#     smtp_username = os.getenv('SMTP_USERNAME')
+#     smtp_password = os.getenv('SMTP_PASSWORD')
+#     from_email = os.getenv('FROM_EMAIL')
+#     to_email = email
+
+#     connection = smtplib.SMTP(smtp_server, smtp_port)
+#     connection.ehlo()
+#     connection.starttls()
+#     connection.login(smtp_username, smtp_password)
+
+#     # Create email message
+#     subject = "Password Reset"
+#     body = "Your password has been reset successfully. Please login with your new password."
+#     msg = MIMEText(body)
+#     msg['Subject'] = subject
+#     msg['From'] = from_email
+#     msg['To'] = to_email
+
+#     # Send email
+#     connection.send_message(msg)
+#     connection.close()
+
+# Define request body schema for forgot password
+class ForgotPassword(BaseModel):
+    email: str
+    new_password: str
+
+
+@app.post("/donor-forgot-password")
+def donor_forgot_password(forgot_password: ForgotPassword, db: Session = Depends(get_db)):
+    email = forgot_password.email
+    new_password = forgot_password.new_password
+
+    # Check if the provided email exists in the database
+    donor = db.query(Donor).filter(Donor.emailID == email).first()
+    if donor is None:
+        return {"error": "Email not found"}
+
+    # Update the donor's password in the database
+    donor.password = new_password
+    db.commit()
+
+    # Send password reset email
+    send_password_reset_email(donor.emailID)
+
+    return {"message": "Password updated successfully. Please check your email for further instructions"}
+
+@app.post("/recipient-forgot-password")
+def recipient_forgot_password(forgot_password: ForgotPassword, db: Session = Depends(get_db)):
+    email = forgot_password.email
+    new_password = forgot_password.new_password
+
+    # Check if the provided email exists in the database
+    donor = db.query(Recipient).filter(Recipient.emailID == email).first()
+    if donor is None:
+        return {"error": "Email not found"}
+
+    # Update the donor's password in the database
+    donor.password = new_password
+    db.commit()
+
+    # Send password reset email
+    send_password_reset_email(donor.emailID)
+
+    return {"message": "Password updated successfully. Please check your email for further instructions"}
+
+
+def send_password_reset_email(email: str):
+    # Create SMTP connection
+    smtp_server = "smtp-relay.sendinblue.com"  # Update with your SMTP server
+    smtp_port = 587  # Update with your SMTP port
+    smtp_username = "leviacekermanaot@gmail.com"  # Update with your SMTP username
+    smtp_password = "7z2bnQXAYMV3S4ta"  # Update with your SMTP password
+    from_email = "lifesource.purdue@gmail.com"  # Update with your email address
+    to_email = email
+
+    connection = smtplib.SMTP(smtp_server, smtp_port)
+    connection.ehlo()
+    connection.starttls()
+    connection.login(smtp_username, smtp_password)
+
+    # Create email message
+    subject = "Password Reset"
+    body = "Your password has been reset successfully. Please login with your new password."
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_email
+    msg['To'] = to_email
+
+    # Send email
+    connection.send_message(msg)
+    connection.close()
