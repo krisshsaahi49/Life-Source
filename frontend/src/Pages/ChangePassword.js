@@ -21,36 +21,39 @@ const ChangePassword = () => {
 
   return (
     <div className="change-password-container">
-      <h2>Change Password</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="currentPassword">Current Password</label>
+      <h2 className="change-password-title">Change Password</h2>
+      <form onSubmit={handleSubmit} className="change-password-form">
+        <div className="form-group current-password-group">
+          <label htmlFor="currentPassword" className="current-password-label">Current Password</label>
           <input
             type="password"
             id="currentPassword"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
+            className="current-password-input"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="newPassword">New Password</label>
+        <div className="form-group new-password-group">
+          <label htmlFor="newPassword" className="new-password-label">New Password</label>
           <input
             type="password"
             id="newPassword"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            className="new-password-input"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+        <div className="form-group confirm-password-group">
+          <label htmlFor="confirmPassword" className="confirm-password-label">Confirm Password</label>
           <input
             type="password"
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            className="confirm-password-input"
           />
         </div>
-        <button type="submit">Save</button>
+        <button type="submit" className="change-password-submit-button">Save</button>
       </form>
     </div>
   );

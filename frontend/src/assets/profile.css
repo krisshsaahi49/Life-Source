@@ -39,7 +39,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
+    background-color: rgb(67, 34, 34);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
     display: flex;
