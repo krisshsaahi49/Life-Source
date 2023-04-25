@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../assets/recipientMain.css";
 import RecipientProfile from "./RecipientProfile";
+import Breadcrumb from "../components/Breadcrumb";
 
 const RecipientMainPage = () => {
   const [bloodGroup, setBloodGroup] = useState(""); // State for selected blood group
@@ -32,9 +33,17 @@ const RecipientMainPage = () => {
   };
 
   return (
+    <>
+    <Breadcrumb
+        breadcrumbClass="breadcrumb_area_two"
+        imgName="breadcrumb/banner_bg.png"
+        Ptitle="Recipient Page"
+        Pdescription="Hello user, Welcome back!"
+      />
     <div id="donor" className="wrapper">
+      
       <RecipientProfile />
-      <h2>Recipient Page</h2>
+      <h2>Select your blood group requirement</h2>
       <label htmlFor="bloodGroup">Select Blood Group:</label>
       <select
         id="bloodGroup"
@@ -64,6 +73,7 @@ const RecipientMainPage = () => {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 
