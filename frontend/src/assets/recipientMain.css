@@ -58,4 +58,58 @@
   li button {
     margin-left: 10px;
   }
-  
+
+  .breadcrumb_area_signup {
+    /* background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%); */
+    background-image: linear-gradient(10deg, #3e4f1ee5 10%, #73a8e9 100%);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    height : 300px;
+    width: 500px;
+    padding: 35px 10px 25px;
+    display:flex;
+  }
+
+
+.breadcrumb_area_signup .breadcrumb_shap {
+position: absolute;
+right: 0;
+top: 0;
+z-index: -1;
+}
+.breadcrumb_area_signup p{
+max-width: 1000px;
+margin-left: auto;
+margin-right: auto;
+}
+.link_wrapper {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+text-align: center;
+max-width: 580px;
+margin: 0 auto;
+}
+
+.breadcrumb_area_signup {
+  /* background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%); */
+  background-image: linear-gradient(180deg, #e8ed2c57 0%, #782a2a 100%);
+  position: relative;
+  z-index: 1;
+  padding: 235px 0px 125px;
+  overflow: hidden;
+}
+
+.breadcrumb_area_signup .breadcrumb_shap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+.breadcrumb_area_signup p{
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}

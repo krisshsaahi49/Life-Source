@@ -6,10 +6,10 @@ const Donor = () => {
   return (
     <div id="donor" className="body_wrapper">
       <Breadcrumb
-        breadcrumbClass="breadcrumb_area"
+        breadcrumbClass="breadcrumb_area_login"
         imgName="breadcrumb/banner_bg.png"
         Ptitle="Donor"
-        Pdescription="Donors are individuals who voluntarily give blood or blood components for transfusion or other medical purposes. Data collected on donors includes demographic information like age, gender, race/ethnicity, medical history, and blood type. Donors are also screened for health conditions and infectious diseases to ensure the safety of the blood supply."
+        Pdescription="Donors are individuals who voluntarily give blood or blood components for transfusion or other medical purposes. Data collected on donors includes demographic information like age, gender, race/ethnicity, medical history, and blood type. Donors are also screened for health conditions and infectious diseases to ensure the safety of the blood supply. Donors play a crucial role in ensuring a stable blood supply for patients in need."
       />
     
     <div className="link_wrapper">

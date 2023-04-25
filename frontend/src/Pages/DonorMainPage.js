@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import DonorProfile from "./DonorProfile";
+import Breadcrumb from "../components/Breadcrumb";
+import "../assets/recipientMain.css";
 
 const DonorMainPage = () => {
   const [requests, setRequests] = useState([]); // State for storing incoming requests
@@ -29,6 +31,13 @@ const DonorMainPage = () => {
   };
 
   return (
+    <>
+    <Breadcrumb
+        breadcrumbClass="breadcrumb_area_two"
+        imgName="breadcrumb/banner_bg.png"
+        Ptitle="Donor Page"
+        Pdescription="Hello user, Welcome back!"
+      />
     <div className="wrapper">
         <DonorProfile/>
       <h2>Donor Page</h2>
@@ -52,6 +61,7 @@ const DonorMainPage = () => {
         Simulate Incoming Request
       </button>
     </div>
+    </>
   );
 };
 

@@ -1,5 +1,11 @@
 .body_wrapper {
-    background-color: #f8f8f8;
+    background-color: #cee4bf;
+    /* background-image:'doodle.jpg'; */
+    /* background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.123rf.com%2Fphoto_72811326_hand-drawn-doodle-donation-icons-set-vector-illustration-charity-symbols-collection-cartoon-donate-s.html%3Fvti%3Dundefined-1-80&psig=AOvVaw2kSCmp4l-mQBCZ2-lxCa24&ust=1682466277265000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOint7rZw_4CFQAAAAAdAAAAABAR'); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display:list-item;
 }
 
 .login-wrapper {
@@ -13,8 +19,42 @@
 
 .donor-wrapper,
 .recipient-wrapper {
-    flex-basis: 50%;
+    flex-basis: 30%;
     padding: 20px;
 }
+
+.breadcrumb_area_login {
+        /* background-image: linear-gradient(180deg, #e8ed2c57 0%, #3552dc 100%); */
+        background-image: linear-gradient(10deg, #3e4f1ee5 10%, #73a8e9 100%);
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        height : 300px;
+        width: 500px;
+        padding: 35px 10px 25px;
+        display:flex;
+      }
+
+
+.breadcrumb_area_login .breadcrumb_shap {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+  .breadcrumb_area_login p{
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .link_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
 
 /* Add additional styles as needed for the Donor and Recipient components */
