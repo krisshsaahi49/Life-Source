@@ -1,0 +1,87 @@
+   .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    justify-content: flex-start;
+    padding: 250px;
+    background-image: url('../img/donorblood.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .donor-welcome-header,
+  .donor-page-header {
+    font-size: 32px;
+    text-align: left;
+    margin: 20px 0;
+  }
+  
+  .incoming-requests-header {
+    margin-top: 40px;
+    text-align: left;
+  }
+  
+  .incoming-requests-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .incoming-requests-item {
+    margin: 10px 0;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .accept-button,
+  .reject-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .reject-button {
+    background-color: #f44336;
+  }
+  
+  .no-requests-text {
+    margin-top: 40px;
+    text-align: left;
+  }
+  
+  .simulate-button {
+    margin-top: 20px;
+    background-color: #008CBA;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .simulate-button:hover {
+    background-color: #006f8c;
+  }
+  
