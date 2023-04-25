@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "../assets/recipientMain.css";
 import RecipientProfile from "./RecipientProfile";
 
-const RecipientMainPage = () => {
+const RecipientMainPage = (props) => {
   const [bloodGroup, setBloodGroup] = useState(""); // State for selected blood group
   const [donors, setDonors] = useState([]); // State for storing donor names
+  const { email } = props.location.state??'';
+  
 
   // Function to handle blood group selection
   const handleBloodGroupChange = (event) => {
@@ -33,7 +35,7 @@ const RecipientMainPage = () => {
 
   return (
     <div className="recipient-container">
-      <RecipientProfile />
+      <RecipientProfile email={email}/>
       <div className="recipient-search-container">
         <h2 className="recipient-search-header">Find a Donor</h2>
         <div className="recipient-search-input-container">

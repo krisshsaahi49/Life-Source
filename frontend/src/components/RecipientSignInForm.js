@@ -25,14 +25,14 @@ const RecipientSignInFrom = () => {
         if (response.status === 200) {
           // Store user session data in localStorage
           localStorage.setItem("isLoggedIn", true);
-          // window.location = "/RecipientMainPage";
-          history.push("/RecipientMainPage");
+          history.push("/RecipientMainPage",{ email: email });
         } else {
           alert("Invalid Login details");
         }
       })
       .catch((error) => {
         console.error("Error:", error);
+        alert("Invalid Login details");
       });
   };
 
