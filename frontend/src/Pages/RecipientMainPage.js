@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../assets/recipientMain.css";
 import RecipientProfile from "./RecipientProfile";
-import Breadcrumb from "../components/Breadcrumb";
 
 const RecipientMainPage = () => {
   const [bloodGroup, setBloodGroup] = useState(""); // State for selected blood group
@@ -29,52 +28,58 @@ const RecipientMainPage = () => {
   // Function to handle request button click
   const handleRequestClick = (donorName) => {
     // For demonstration purposes, I am showing an alert with the donor name
-    alert(`Request sent to ${donorName} for blood donation.`);
+    alert(`Request mail sent to ${donorName} for blood donation.`);
   };
 
   return (
-    <>
-    <Breadcrumb
-        breadcrumbClass="breadcrumb_area_two"
-        imgName="breadcrumb/banner_bg.png"
-        Ptitle="Recipient Page"
-        Pdescription="Hello user, Welcome back!"
-      />
-    <div id="donor" className="wrapper">
-      
+    <div className="recipient-container">
       <RecipientProfile />
-      <h2>Select your blood group requirement</h2>
-      <label htmlFor="bloodGroup">Select Blood Group:</label>
-      <select
-        id="bloodGroup"
-        value={bloodGroup}
-        onChange={handleBloodGroupChange}
-      >
-        <option value="">--Select Blood Group--</option>
-        <option value="A+">A+</option>
-        <option value="B+">B+</option>
-        <option value="O+">O+</option>
-        <option value="AB+">AB+</option>
-        <option value="A-">A-</option>
-        <option value="B-">B-</option>
-        <option value="O-">O-</option>
-        <option value="AB-">AB-</option>
-      </select>
-      <button onClick={handleSearchClick}>Search</button>
-      <div>
-        <h3>Donors with {bloodGroup} blood group:</h3>
-        <ul>
-          {donors.map((donor, index) => (
-            <li key={index}>
-              {donor.firstName} {donor.lastName}
-              <button onClick={() => handleRequestClick(donor)}>Request</button>
-            </li>
-          ))}
-        </ul>
+      <div className="recipient-search-container">
+        <h2 className="recipient-search-header">Find a Donor</h2>
+        <div className="recipient-search-input-container">
+          <label htmlFor="bloodGroup" className="recipient-search-label">
+            Select Blood Group:
+          </label>
+          <select
+            id="bloodGroup"
+            value={bloodGroup}
+            onChange={handleBloodGroupChange}
+            className="recipient-search-select"
+          >
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="B+">B+</option>
+            <option value="O+">O+</option>
+            <option value="AB+">AB+</option>
+            <option value="A-">A-</option>
+            <option value="B-">B-</option>
+            <option value="O-">O-</option>
+            <option value="AB-">AB-</option>
+          </select>
+          <button onClick={handleSearchClick} className="recipient-search-button">
+            Search
+          </button>
+        </div>
+        <div className="recipient-donors-container">
+          <h3 className="recipient-donors-header">Donors with {bloodGroup} blood group:</h3>
+          <ul className="recipient-donors-list">
+            {donors.map((donor, index) => (
+              <li className="recipient-donors-item" key={index}>
+               {donor.firstName}{donor.lastName}
+                <button
+                  className="recipient-donor-button"
+                  onClick={() => handleRequestClick(donor.firstName)}
+                >
+                  Request
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
-    </>
   );
 };
 
 export default RecipientMainPage;
+

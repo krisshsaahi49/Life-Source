@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import DonorProfile from "./DonorProfile";
-import Breadcrumb from "../components/Breadcrumb";
 import "../assets/recipientMain.css";
 
 const DonorMainPage = () => {
@@ -32,13 +31,8 @@ const DonorMainPage = () => {
 
   return (
     <>
-    <Breadcrumb
-        breadcrumbClass="breadcrumb_area_two"
-        imgName="breadcrumb/banner_bg.png"
-        Ptitle="Donor Page"
-        Pdescription="Hello user, Welcome back!"
-      />
-    <div className="wrapper">
+     <div id="donor" className="wrapper">
+      <h2>Welcome to Donor Page</h2>
         <DonorProfile/>
       <h2>Donor Page</h2>
       {requests.length > 0 ? (
