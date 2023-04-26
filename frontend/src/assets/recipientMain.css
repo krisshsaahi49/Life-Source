@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   background-color: #f7f7f7;
   height: 100vh;
   background-image: url('../img/recipientblood3.png');
@@ -22,7 +22,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   padding: 40px;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 150px;
   width: 50%;
   max-width: 600px;
   max-height: 500px;
