@@ -1,65 +1,65 @@
 /* profile.css */
 .profile-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .profile-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-  
-  .profile-info {
-    margin-left: 10px;
-  }
-  
-  .profile-text {
-    margin: 0;
-  }
-  
-  .profile-text h4 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .profile-text p {
-    margin: 0;
-    font-size: 14px;
-    color: #999;
-  }
-  
-  .profile-actions {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: rgb(67, 34, 34);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 4px;
-    align-items: flex-start;
-  }
-  
-  .profile-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .profile-button:hover {
-    background-color: #0056b3;
-  }
-  
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-info {
+  margin-left: 10px;
+}
+
+.profile-text {
+  margin: 0;
+}
+
+.profile-text h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.profile-actions {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Modified property */
+  gap: 10px;
+  border-radius: 4px;
+  align-items: center; /* Modified property */
+}
+
+.profile-link {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+  border-bottom: 1px solid transparent; /* Added property */
+}
+
+.profile-link:hover {
+  background-color: #d3d3d3;
+  border-bottom: 1px solid #000; /* Added property */
+}
